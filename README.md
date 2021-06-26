@@ -30,3 +30,49 @@ For for the practical portions of this tutorial, participants will use use Eddeb
 
 Participants unable to run docker on the device they will be joining the session from will be placed within breakout groups where at a least one participant does have the setup working, and can share their screen, but working along locally is still preferable.
 
+With Docker installed, doing 
+
+```
+docker pull rocker/r-ver:3.2.2
+```
+
+Should be sufficient to retrieve the rocker image we will use. Once that is done,
+
+```
+docker run -i rocker/r-ver:3.2.2
+```
+
+Will be sufficient to start an interactive R session within that docker image. When yo do this, you should see
+
+
+```
+<your prompt>$ docker run -i rocker/r-ver:3.2.2
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+```
+
+and you should be able to run code, etc within that (quite old) version of R. We will use this fact to explore the bugs we've chosen as our case studies.
+
+
+## Supplemental/Preparatory Reading
+
+[Accessing R Sources - Uwe Ligges](https://cran.r-project.org/doc/Rnews/Rnews_2006-4.pdf) (R Help Desk section near end of pdf)
+
+
+[Parsing Rd Files - Duncan Murdoch](https://developer.r-project.org/parseRd.pdf) (Rd Syntax Specification section)
+
