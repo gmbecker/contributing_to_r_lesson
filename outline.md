@@ -1,32 +1,46 @@
-# Contributing To R
-
+---
+title: Contributing to R
+author: Gabriel Becker and Martin Maechler
+output: 
+  beamer_presentation:
+    latex_engine: xelatex
+    slide_level: 3
+---
 # Introduction
 ## Who We Are
 
-### Martin Maechler
-- R-core (and R-Foundation)
-  - Creator and maintainer of Matrix 
+### Martin Maechler - R-core (and R-Foundation)
+- Creator and maintainer of Matrix 
 - ETH Zurich
 - ESS Project Lead
 
-### Gabriel Becker
-- Thesis work under Duncan Temple Lang
-- Have worked professionally with Robert Gentleman and Michael Lawrence
-- Frequent Collaborator with R-core
-  - Patches accepted by 6 different R-core members
+### Gabriel Becker - Frequent Collaborator with R-core
 - Arguably most feature additions to R from external collaborator "in recent times"
-  - Proposed what became ALTREP and collaborated with Luke Tierney on design and implementation
-  - `debug(., signature = )` and `debugcall(print(myclassedobj))` with Michael Lawrence
+  - Proposed ALTREP, collaborated with Luke Tierney on design and implementation
+  - `debug(., signature = )` and `debugcall(print(.))` with Michael Lawrence
   - `head(mymatrix, c(5, 5))` with Martin Maechler
   - `update_PACKAGES()` with Michael Lawrence
   - `sessionInfo()` returns RNG information when not the default, with Martin Maechler
-  - `which()` support for long vectors and ALTREPs, with Martin Maechler
+  - `which()`  long vector and ALTREP support, with Martin Maechler
   - `ifelse()` refactor for significant speedup with Kurt Hornik
   - `duplicated()`/`unique()`/`anyDuplicated()` sortedness-aware ALTREP fastpass (r-devel only) with Michael Lawrence
 
+## Learning How to Contribute to R
+### The Goal
+- **Is** 
+  - Helping R
+  - By helping R-core maintain it
+  - Thus benefiting ourselves and the larger R community
+- **Is Not**
+  - Professional advancement
+  - Personal recognition/fame (though acknowledgement will occur)
 
-Note: I'm not certain about this part, but the idea here is to "humanize" collaboration with R-core and contribution to R. The remainder of the "talk part" after this will be
-about managing expectations and focusing their energy on what is helpful for R-core
+### We will focus on
+- What kinds of efforts help
+  - and how to perform them
+- What kinds of well-meaning efforts do not help
+  - And how to avoid or improve them
+  
 
 # Gabe As A Case Study - Illustrative Examples From a Patchy Past
 ## Circa 2013 - The CV Padder (AKA Graduate Student)
@@ -60,8 +74,10 @@ about managing expectations and focusing their energy on what is helpful for R-c
 FALSE
 ```
 - Huh, that's weird...
+
 ### A Patch - My Benevolent Gift to R-core and R
 ...
+
 ### And Then
 **Gabe**
 Created attachment 1828 [details]
@@ -93,6 +109,7 @@ Take away points:
 - `debug(., signature = )` and `eval(debugcall(print(myclassedobj)))`
 - S3 and S4 dispatch aware debugging.
   - Masks the weird .local thing function shenanigans you got in S4 method debugging at the time.
+
 ### Some things to keep in mind about this success story
 - I worked (as my job) with Michael Lawrence at Genentech during this time
   - He had just been elected to R-core
@@ -119,7 +136,11 @@ Take away points:
   - I contributed code, soem is still in, some was buggy so not accepted/taken back out.
 - Luke asked that Michael review my code internally (we were still both at Genentech) before submitting
   - This was hard to hear but is understandable.
-  
+
+### Post Inclusion 2019
+- I've submitted several accepted patches which implement or further ALTREP support in the R internals
+  - Some directly to Luke, most via Bugzilla
+
 ### Take Away
 
 - Submitting code to R-core members should be very mature
@@ -129,12 +150,8 @@ Take away points:
 	- their own work
 	- Teaching or day-job duties
 	- all collaborations/patches they are currently involved with
-
-### Post Inclusion 2019
-- I've submitted several accepted patches which implement or further ALTREP support in the R internals
-  - Some directly to Luke, most via Bugzilla
   
-### Take Away Points
+## Take Away Points
 - Members of R-core are open to significant collaboration, but
   - Their time is scarce and extremely precious
   - Significant chunks of code take serious work from them to vet
@@ -143,10 +160,12 @@ Take away points:
 ### Making `head()`s or `tail()`s of Large Rectangular Things
 - Requested as change by Michael Chirico on R-devel
 - Backwards Compatible form proposed by me on R-devel
+
 ### The Patch
 - I propose patch
   - Passed all R's tests (I had learned)
   - "quite a bit of breakage on CRAN" - Martin Maechler
+
 ### The Patch Cont
 - Martin requested I not submit more code, as he was iterating on a local copy to track down and fix CRAN breakages
 
@@ -161,7 +180,6 @@ Take away points:
   - Critiques can feel like attacks but better patches make R better.
   - Learn from this type of feedback
 - It is often easier for R-core members to make changes themselves than accept/iterate on patches
-  -
 
 
 ## Circa 2020-2021 - Duplicated Efforts
@@ -172,10 +190,12 @@ Take away points:
   - Multiple (refactors)/code cleanup passes
   - Extremely exhaustive testing script
 - All *before* even initial submission on bugzilla
+
 ### Luke was focused on the Native Pipe
 - He didn't have time to closely vet hundreds of lines of unsolicited C code
 - Patch sat in bugzilla and I waited
-  - Not personal, Luke just didn't have bandwidth for major changes to R on top of other obligations
+  - Not personal, Luke just didn't have bandwidth
+
 ### Enter Michael Lawrence
 - Contacted me and collaborated on getting the patch in
   - Asked me to formalize my test script into unit tests (oops, duh!)
@@ -190,43 +210,54 @@ Take away points:
 
 
 
-# Overall Take Aways
-- No one starts out perfect, mistakes aren't the end of the world, **BUT**
-  - As external collaborators with R-core members
-	- When making work for them its our job to make as little as possible
-	- Be respectful, not demanding. 
-	- Sometimes the answer is no, even if you still think the idea is good
-		- Even if the idea **is** good (this is different than the point above, and its important you understand why)
-		- If you cant accept that this isn't the right game for you to play
-	- Never "shoot from the hip", each change is a change 
-- Test, test, test
-  - Always test your patches via the full battery of R's `make check-devel` *before submission*
-  - Always include regression tests when you touch existing functionality
-  - Always include unit tests when you're lucky enough to contribute new functionality
+## Overall Take Aways
+### No One is Perfect ... **But**
+- As external collaborators with R-core members
+  - When making work for them its our job to make as little as possible
+  - Be respectful, not demanding. 
+  - Sometimes the answer is no, even if you still think the idea is good
+	- Even if the idea **is** good (this is different than the point above, and its important you understand why)
+	- If you cant accept that this isn't the right game for you to play
+  - Never "shoot from the hip", each change is a change 
+
+### Test, test, test
+- Always test your patches via the full battery of R's `make check-devel` *before submission*
+- Submit some form of testing/confirmation
+  - Test script that R-core can consider and add as formal tests
+	- Note if you don't have this, you're not ready to submit
+  - Formal tests, sometimes, but these take a lot of care in designing
 
 
 # Contributing to R
 ## No patches yet
 - Discuss Tomas and Luke's blogposts
+
 ### Confirming bugs
+
 ### Generating reproducible examples which **only** use base packages
+
 ### Careful bug analysis
 
 **Code Analysis Practicum 1?**
 
 ## Submitting Bugs
 ### Confirm it's present in up-to-date R-devel
+
 ### Confirm it's a bug in R itself
 Run it
 - in plain R (no RStudio or other IDE)
 - with no non-base/non-recommended packages loaded
+
 ### Within R isolate it as much as you can
 - To an R function which hits C code, or to the actual offending pure-R function
 - Bonus points if you can (correctly) narrow it down further to which C funciton and why its choking
+
 ### Search bugzilla for if it has already been reported
+
 ### (obtain bugzilla account and) Submit bug
 
 # Possibly Patches (but Still Probably Not)
+
 ## R-core's Engineering Philosophy (as my interactions with them have lead me to understand it)
 - Backwards compatability is **very** important and thus given very high weight
 - Anything that can be implemented in an addon package generally should be
@@ -240,6 +271,7 @@ Run it
 	- Even if the patch you submit is perfect
 - Most things within/by R-core happen on an "Individual Iniative + Lack of Opposition" model
   - Convincing/working with the one relevant R-core member tends to be enough (for most things)
+
 ## So (for your own sake and R-core's) Do Not
 - Start with feature additions
 - Submit patches which change existing (non-bug) behavior without hearing from R-core they are interested
@@ -254,6 +286,7 @@ Run it
 ## Typo reporting/fixes always welcome
 - Usually a patch not required, just pointing it out on the r-devel mailing list
   - generally receives prompt and appreciative response
+
 ## Larger changes to documentation
 - Only when its really necessary or R-core has solicited/stated interest in a patch
 - **Must be at least as technically correct as the old documentation**
@@ -279,9 +312,11 @@ Run it
 - Low cost
 - Appreciated
 - Absolutely no guarantee of it ever being done
+
 ## Unsolicited feature addition patches
 - Generally ... don't
 - Bring up on R-devel mailinglist or bugzilla wishlist item first
+
 ## Solicited/interest confirmed behavior additions
 - Good to collaborate, voice your opinion
   - R-core member has final say on all matters
@@ -299,7 +334,9 @@ Run it
 
 # Finding your way around a checkout of the R sources
 ## Finding core C-code
+
 ## Finding tests
+
 ## Finding R code/documentation/etc of base packages
 
 **R checkout and Build Practicum? Is that even in scope?**
