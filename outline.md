@@ -82,6 +82,7 @@ FALSE
 
 ### And Then
 **Gabe**
+
 Created attachment 1828 [details]
 Fix patch
 
@@ -91,16 +92,19 @@ Arity check needs to happen before the special casing for unary ops (assumed to 
 
 ### 😬😬😬 (3 grimace face emojis)
 **Martin**
+
 <snip>
 There's more:  Gabriel said "tested"... well, not really: You did not run R's own tests successfully:  These are listed as S3 generic primitives and so
  &.foo <- function(x, ...) { ........ }
 has worked and this is detected by our checks.
+
 Consequently, the checkArity() test should *not* happen before dispatch...
 
 I'm currently testing things
 
 ### So ... Yeah. Not Great.
 Take away points:
+
 - Test your patches
 - Test your patches
 - Test your patches
@@ -117,6 +121,8 @@ Take away points:
   - He had just been elected to R-core
 - 20+ comment conversation on bugzilla about it
   - 4 distinct versions of the patch
+  
+### More context
 - I disagreed with Michael and Martin about design/API for `debugcall`
   - My patches after the first iteration implemented their preferred API
 - It was accepted, but not until after feature freeze for the upcoming version of R
@@ -218,7 +224,7 @@ Take away points:
   - When making work for them its our job to make as little as possible
   - Be respectful, not demanding. 
   - Sometimes the answer is no, even if you still think the idea is good
-	- Even if the idea **is** good (this is different than the point above, and its important you understand why)
+	- Even if the idea **is** good
 	- If you cant accept that this isn't the right game for you to play
   - Never "shoot from the hip", each change is a change 
 
@@ -260,24 +266,36 @@ Run it
 
 # Possibly Patches (but Still Probably Not)
 
-## R-core's Engineering Philosophy (as my interactions with them have lead me to understand it)
-- Backwards compatibility is **very** important and thus given very high weight
-- Anything that can be implemented in an addon package generally should be
+
+# R-core's Engineering Philosophy (as my interactions with them have lead me to understand it)
+### R's Maintenance/Design Philosophy
+- Backwards compatability is **very** important
+- Anything that can go in a package, should
   - At **least** as a testing/maturation stage
   - in many cases, indefinitely/"permanently"
-  - "lots of people use/want/would want this" is in general not a counterargument to this
-- There probably won't ever be any new Recommended packages which ship with R
-  - packages being extremely widely used and people really liking them do not change this
-- Helping them squash bugs saves them work, proposing new features creates work for them
+  - Popularity in community not generally a counterargument
+- R-core operates on "Individual Iniitiave + Lack of Opposition" model
+  - Whether this is optimal is not relevant, it is the existing reality
+  - Means convincing one R-core member usually enough
+
+### R's Maintenance/Design Philosoph Con't
+
+- Probably no new Recommended pkgs, ever (- Luke Tierney)
+  - Popularity again will not change this
+- Proposing new features creates work for them
   - Even if you submit a patch
 	- Even if the patch you submit is perfect
-- Most things within/by R-core happen on an "Individual Initiative + Lack of Opposition" model
-  - Convincing/working with the one relevant R-core member tends to be enough (for most things)
+  - doesn't mean never do it, but be cognizant 
+- Helping squash bugs *saves* them work
+  - Even with no patch
+	- sometimes especiaily with no patch
 
-## So (for your own sake and R-core's) Do Not
+
+  
+### So (for your own sake and R-core's) Do Not
 - Start with feature additions
 - Submit patches which change existing (non-bug) behavior without hearing from R-core they are interested
-  - Not agreeing with the documented existing behavior does not make something a bug
+  - You not agreeing with the documented existing behavior does not make something a bug
 - Expect quick turn around on wishlist items you file without a proposed patch
 - Try to get another R-core member to overrule one whose decision you don't like
   - I don't know of any times where this happened. Lets keep it that way
@@ -317,6 +335,7 @@ Run it
 
 ## Unsolicited feature addition patches
 - Generally ... don't
+  - Good chance it won't be adopted, don't want to waste your time
 - Bring up on R-devel mailinglist or bugzilla wishlist item first
 
 ## Solicited/interest confirmed behavior additions
@@ -331,15 +350,35 @@ Run it
 
 # Add part about why not speedups
 
-
+- Maintainability and readable code may oppose extreme optimizations
 
 
 # Finding your way around a checkout of the R sources
-## Finding core C-code
-
 ## Finding tests
 
 ## Finding R code/documentation/etc of base packages
 
 **R checkout and Build Practicum? Is that even in scope?**
  Uwe Ligges article about the tarball. R journal
+
+
+## Possible Patch Practicals
+
+### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17150
+
+- as.person not handling multiple emails in the string
+- requires
+  - locating source code
+  - regular expressions
+
+### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17167
+
+- is.ratetable inconsistent between verbose=TRUE and verbose=FALSE
+- Not an R bug
+  - Good practice for recognizing that
+  
+### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16940
+
+- diff on difftime object losing unit
+- involves S3 dispatch/methods
+- fix is small
