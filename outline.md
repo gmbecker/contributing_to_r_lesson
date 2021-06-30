@@ -10,9 +10,11 @@ output:
 ## Who We Are
 
 ### Martin Maechler - R-core (and R-Foundation)
-- Creator and maintainer of Matrix 
-- ETH Zurich
+- R-core from the start (1997) and R-Foundation Board.
+  - Co-Creator (with Doug Bates) and maintainer of Matrix, cluster, robustbase, Rmpfr, ..
+- ETH Zurich, adjoint Prof in Math Stats
 - ESS Project Lead
+
 
 ### Gabriel Becker - Frequent Collaborator with R-core
 - Arguably most feature additions to R from external collaborator "in recent times"
@@ -119,7 +121,7 @@ Take away points:
   - My patches after the first iteration implemented their preferred API
 - It was accepted, but not until after feature freeze for the upcoming version of R
   - This meant it remained exclusive to R devel for ~a year until the next primary release
-- Patch was still further refactored by Michael in the process of commiting it into the R sources
+- Patch was still further refactored by Michael in the process of committing it into the R sources
 
 ## Circa 2016 - 2019  - The ALTREP Years
 ### The Proposal
@@ -133,7 +135,7 @@ Take away points:
 - My proof of concept was a type of vector that was a "window" to another vector's data
   - "Worked" but didn't respect R's copy on write semantics
 - Luke implemented the ALTREP framework
-  - I contributed code, soem is still in, some was buggy so not accepted/taken back out.
+  - I contributed code, some is still in, some was buggy so not accepted/taken back out.
 - Luke asked that Michael review my code internally (we were still both at Genentech) before submitting
   - This was hard to hear but is understandable.
 
@@ -144,7 +146,7 @@ Take away points:
 ### Take Away
 
 - Submitting code to R-core members should be very mature
-  - This is difficult, comes with pratice somewhat
+  - This is difficult, comes with practice somewhat
 	- Code review may be painful but is a great tool to get better
   - R-core collectively have little time spread across
 	- their own work
@@ -210,7 +212,7 @@ Take away points:
 
 
 
-## Overall Take Aways
+## Overall Take Always
 ### No One is Perfect ... **But**
 - As external collaborators with R-core members
   - When making work for them its our job to make as little as possible
@@ -230,7 +232,7 @@ Take away points:
 
 # Contributing to R
 ## No patches yet
-- Discuss Tomas and Luke's blogposts
+- Discuss Tomas and Luke's blog-posts
 
 ### Confirming bugs
 
@@ -250,7 +252,7 @@ Run it
 
 ### Within R isolate it as much as you can
 - To an R function which hits C code, or to the actual offending pure-R function
-- Bonus points if you can (correctly) narrow it down further to which C funciton and why its choking
+- Bonus points if you can (correctly) narrow it down further to which C function and why its choking
 
 ### Search bugzilla for if it has already been reported
 
@@ -259,7 +261,7 @@ Run it
 # Possibly Patches (but Still Probably Not)
 
 ## R-core's Engineering Philosophy (as my interactions with them have lead me to understand it)
-- Backwards compatability is **very** important and thus given very high weight
+- Backwards compatibility is **very** important and thus given very high weight
 - Anything that can be implemented in an addon package generally should be
   - At **least** as a testing/maturation stage
   - in many cases, indefinitely/"permanently"
@@ -269,7 +271,7 @@ Run it
 - Helping them squash bugs saves them work, proposing new features creates work for them
   - Even if you submit a patch
 	- Even if the patch you submit is perfect
-- Most things within/by R-core happen on an "Individual Iniative + Lack of Opposition" model
+- Most things within/by R-core happen on an "Individual Initiative + Lack of Opposition" model
   - Convincing/working with the one relevant R-core member tends to be enough (for most things)
 
 ## So (for your own sake and R-core's) Do Not
@@ -302,8 +304,8 @@ Run it
 - patches which do not include unit/regression tests as appropriate
 - **patches you have not personally tested the exact diff file you are submitting against R-devel/trunk**
   - make check-devel in the R build directory
-- **patches which bundle enhancements (even related ones) with bugfixes**
-- **patches which bundle multiple bugfixes which are not inextricably linked**
+- **patches which bundle enhancements (even related ones) with bug fixes**
+- **patches which bundle multiple bug fixes which are not inextricably linked**
 
 ## Do
 
@@ -323,7 +325,7 @@ Run it
 	- this is because they own the code, and any problems with it, once they commit it
 - Be prepared to refactor code before submitting it to your collaborator
   - This is generally a good sign, your first pass is rarely your best
-- Test it tow ithin an inch of its life, then keep going
+- Test it tow within an inch of its life, then keep going
   - Think of any possible corner case you can, and test every single one of them
 - If at all possible, have someone else technically skilled in R review it
 
