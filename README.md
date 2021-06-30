@@ -81,8 +81,9 @@ and you should be able to run code, etc within that (quite old) version of R. We
 
 ## Supplemental/Preparatory Reading
 
-[Accessing R Sources - Uwe Ligges](https://cran.r-project.org/doc/Rnews/Rnews_2006-4.pdf)
-(R Help Desk section, p.43--45)
+[Accessing R Sources - Uwe Ligges](https://www.r-project.org/doc/Rnews/Rnews_2006-4_Ligges_AccessSource.pdf), an excerpt from
+[R News 2006-4](https://cran.r-project.org/doc/Rnews/Rnews_2006-4.pdf);
+R Help Desk, p.43--45.
 
 
 [Parsing Rd Files - Duncan Murdoch](https://developer.r-project.org/parseRd.pdf) (Rd Syntax Specification section)
