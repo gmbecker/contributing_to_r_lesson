@@ -3,10 +3,13 @@ Gabriel Becker and Martin Maechler
 
 ## Code of Conduct
 
-The [useR2021 conference Code of Conduct](https://user2021.r-project.org/participation/coc/) applies to all aspects of this tutorial and will be enforced throughout. By joining the tutorial session you agree to abide by the code of conduct at all times in both the main tutorial call and all break-out 'rooms'.
+The [useR2021 conference Code of Conduct](https://user2021.r-project.org/participation/coc/)
+ applies to all aspects of this tutorial and will be enforced throughout.  By joining the
+ tutorial session you agree to abide by the code of conduct at all times in
+ both the main tutorial call and all break-out 'rooms'. 
 
-Please bring any violations to the code of conduct to the immediate attention of Gabriel, Martin, or one of the helpers inattendence. 
-
+Please bring any violations to the code of conduct to the immediate
+attention of Gabriel, Martin, or one of the helpers in attendence. 
 
 ## Zoom
 
@@ -24,11 +27,18 @@ Part or all of this tutorial will be recorded and made available to the wider R 
 
 ## Docker and Rocker
 
-For for the practical portions of this tutorial, participants will use use Eddebuetel and Boetiger's [rocker](https://www.rocker-project.org/) project to step into older versions of R to explore real bugs which have since been fixed.
+For for the practical portions of this tutorial, participants will use use Eddelbuettel and Boettiger's
+ [rocker](https://www.rocker-project.org/) project to step into older versions of R to explore real bugs which have since been fixed.
 
 **Prior to the start of the session** please have docker installed and the `rocker/r-ver:3.2.2` docker image pulled and tested.
 
-Participants unable to run docker on the device they will be joining the session from will be placed within breakout groups where at a least one participant does have the setup working, and can share their screen, but working along locally is still preferable.
+Participants unable to run docker on the device they will be joining the session from will be placed
+within breakout groups where at a least one participant does have the setup working, and can
+share their screen, but working along locally is still preferable.
+
+__Note__ you can *also* use `podman` instead of `docker`, notably on
+Fedora/Redhat/... Linux systems where it is well supported.  
+In the terminal, simply replace the word `docker` by `podman`.
 
 With Docker installed, doing 
 
@@ -71,7 +81,8 @@ and you should be able to run code, etc within that (quite old) version of R. We
 
 ## Supplemental/Preparatory Reading
 
-[Accessing R Sources - Uwe Ligges](https://cran.r-project.org/doc/Rnews/Rnews_2006-4.pdf) (R Help Desk section near end of pdf)
+[Accessing R Sources - Uwe Ligges](https://cran.r-project.org/doc/Rnews/Rnews_2006-4.pdf)
+(R Help Desk section, p.43--45)
 
 
 [Parsing Rd Files - Duncan Murdoch](https://developer.r-project.org/parseRd.pdf) (Rd Syntax Specification section)
