@@ -79,15 +79,74 @@ If using the rstudio image, please read and understand the insturctions for usin
 
 If for some reason you choose not to use the rstudio based images, ensure your container has some other progam usable as an IDE (e.g., emacs with ess) installed.
 
-Configure a volume for your container, using the instructions: [https://docs.docker.com/storage/volumes/](https://docs.docker.com/storage/volumes/)
-
-Use that volume when running the container, and download and untar the R 3.3.2 source tarball ( [https://cloud.r-project.org/src/base/R-3/R-3.3.2.tar.gz](https://cloud.r-project.org/src/base/R-3/R-3.3.2.tar.gz) ) onto it. We will explore and use portions of these sources in the practical portions of the tutorial.
-
-To get an interactive shell in your docker container (rather than starting R or Rstudio server), you can do
-
-`docker run -it rocker/rstudio:3.3.2 bash`
+Configure a volume for your container, like so (see full documentation for volumes here: [https://docs.docker.com/storage/volumes/](https://docs.docker.com/storage/volumes/))
 
 
+```
+docker volume create r-source
+```
+
+Ensure your volume was created using `docker volume ls`
+
+```
+Gabriels-MacBook-Pro:rtables_paper gabrielbecker$ docker volume ls
+DRIVER    VOLUME NAME
+<snip>
+local     r-source
+```
+
+Then start a shell in your docker container with the volume mounted
+
+```
+docker run -it --mount src=r-source,target=/r-source rocker/rstudio:3.3.2 bash
+root@788c85efe291:/# 
+```
+
+By doing `ls` we can see that our mounted volume is there:
+
+```
+root@788c85efe291:/# ls
+bin  boot  dev	etc  home  init  lib  lib64  media  mnt  opt  proc  root  r-source  run  sbin  srv  sys  tmp  usr  var
+```
+
+Then navigate to that directory and use `wget` and `tar` to download and untar the R 3.3.2 source tarball ( [https://cloud.r-project.org/src/base/R-3/R-3.3.2.tar.gz](https://cloud.r-project.org/src/base/R-3/R-3.3.2.tar.gz) ) onto it. 
+
+```
+root@93dde2224f94:/r-source# wget https://cloud.r-project.org/src/base/R-3/R-3.3.2.tar.gz
+--2021-07-02 17:20:01--  https://cloud.r-project.org/src/base/R-3/R-3.3.2.tar.gz
+Resolving cloud.r-project.org (cloud.r-project.org)... 204.246.191.121, 204.246.191.87, 204.246.191.77, ...
+Connecting to cloud.r-project.org (cloud.r-project.org)|204.246.191.121|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 29440670 (28M) [application/x-gzip]
+Saving to: ‘R-3.3.2.tar.gz’
+
+R-3.3.2.tar.gz                                                100%[================================================================================================================================================>]  28.08M  9.03MB/s   in 3.1s   
+
+2021-07-02 17:20:04 (9.03 MB/s) - ‘R-3.3.2.tar.gz’ saved [29440670/29440670]
+
+root@93dde2224f94:/r-source# tar -xvf R-3.3.2.tar.gz 
+R-3.3.2/
+R-3.3.2/ChangeLog
+R-3.3.2/config.site
+R-3.3.2/configure
+<snip>
+```
+
+We will explore and use portions of these sources in the practical portions of the tutorial.
+
+Ensure these files are persisted by closing the docker container (e.g. via `exit`, and invoking it again to ensure the files are still there:
+
+```
+root@788c85efe291:/# exit
+exit
+Gabriels-MacBook-Pro:rtables_paper gabrielbecker$ cd ~
+Gabriels-MacBook-Pro:~ gabrielbecker$ docker run -it --mount src=r-source,target=/r-source rocker/rstudio:3.3.2 bash
+root@15a8d340686a:/# cd r-source/
+root@15a8d340686a:/r-source# ls
+R-3.3.2  R-3.3.2.tar.gz
+```
+
+When invoking the Rstudio container as described at  [https://hub.docker.com/r/rocker/rstudio](https://hub.docker.com/r/rocker/rstudio)) be sure to remember to add ` --mount src=r-source,target=/r-source` to the invocation.
 
 
 
