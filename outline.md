@@ -4,19 +4,18 @@ author: Gabriel Becker and Martin Maechler
 output: 
   beamer_presentation:
     latex_engine: xelatex
-    slide_level: 3
+    slide_level: 2
 ---
-# Introduction
-## Who We Are
+# Who We Are
 
-### Martin Maechler - R-core (and R-Foundation)
+## Martin Maechler - R-core (and R-Foundation)
 - R-core from the start (1997) and R-Foundation Board.
   - Co-Creator (with Doug Bates) and maintainer of Matrix, cluster, robustbase, Rmpfr, ..
 - ETH Zurich, adjoint Prof in Math Stats
 - ESS Project Lead
 
 
-### Gabriel Becker - Frequent Collaborator with R-core
+## Gabriel Becker - Frequent Collaborator with R-core
 - Arguably most feature additions to R from external collaborator "in recent times"
   - Proposed ALTREP, collaborated with Luke Tierney on design and implementation
   - `debug(., signature = )` and `debugcall(print(.))` with Michael Lawrence
@@ -27,8 +26,8 @@ output:
   - `ifelse()` refactor for significant speedup with Kurt Hornik
   - `duplicated()`/`unique()`/`anyDuplicated()` sortedness-aware ALTREP fastpass (r-devel only) with Michael Lawrence
 
-## Learning How to Contribute to R
-### The Goal
+# Learning How to Contribute to R
+## The Goal
 - **Is** 
   - Helping R
   - By helping R-core maintain it
@@ -37,7 +36,7 @@ output:
   - Professional advancement
   - Personal recognition/fame (though acknowledgement will occur)
 
-### We will focus on
+## We will focus on
 - What kinds of efforts help
   - and how to perform them
 - What kinds of well-meaning efforts do not help
@@ -45,8 +44,8 @@ output:
   
 
 # Gabe As A Case Study - Illustrative Examples From a Patchy Past
-## Circa 2013 - The CV Padder (AKA Graduate Student)
-### PR#15253 - `identify()` Hanging
+# Circa 2013 - The CV Padder (AKA Graduate Student)
+## PR#15253 - `identify()` Hanging
 - Simon Anders posted a reproducible example
 - I diagnosed the problem:
   - Hang was in `locator` C function not identify logic per se. 
@@ -54,21 +53,21 @@ output:
   - No reponse on bugzilla other than bug status changed to closed-fixed
   - Could see changes in trunk; patch accepted
 
-### Bitwise Operations For Raw Vectors
+## Bitwise Operations For Raw Vectors
 - Reported by Mark Bravington
 - I proposed a patch modifying the C code underlying `bitw*()` R functions
 - Bitwise logical operators implemented in raw methods to standard logical operators
 - Patch not accepted
 - Bug closed as fixed after documentation change by R-core member
 
-### Take Away Points
+## Take Away Points
 - Working patches will not always be accepted, even if nothing is wrong
   - These take the same amount of work from the submitter
 - Sometimes a patch changing behavior is not the correct fix
   - Even to problems that are real
 
-## Circa 2015 - Icaris Flies With Such Very Sturdy Wings
-### PR#16385 - All logical operaters (silently) behave as `!` when called with 1 argument
+# Circa 2015 - Icaris Flies With Such Very Sturdy Wings
+## PR#16385 - All logical operaters (silently) behave as `!` when called with 1 argument
 - Reported By Barry Rowlingson
 -
 ```
@@ -77,10 +76,10 @@ FALSE
 ```
 - Huh, that's weird...
 
-### A Patch - My Benevolent Gift to R-core and R
+## A Patch - My Benevolent Gift to R-core and R
 ...
 
-### And Then
+## And Then
 **Gabe**
 
 Created attachment 1828 [details]
@@ -90,7 +89,7 @@ I called checkArity with the signature of Rf_checkArity (including the call) in 
 
 Arity check needs to happen before the special casing for unary ops (assumed to be `!` ) on simple logical scalars.
 
-### 😬😬😬 (3 grimace face emojis)
+## 😬😬😬 (3 grimace face emojis)
 **Martin**
 
 <snip>
@@ -102,41 +101,41 @@ Consequently, the checkArity() test should *not* happen before dispatch...
 
 I'm currently testing things
 
-### So ... Yeah. Not Great.
+## So ... Yeah. Not Great.
 Take away points:
 
 - Test your patches
 - Test your patches
 - Test your patches
 
-## Circa 2017 - Feature Engineering Over and Over
+# Circa 2017 - Feature Engineering Over and Over
 
-### My First Added Feature (That ~0 People Know About Or Use)
+## My First Added Feature (That ~0 People Know About Or Use)
 - `debug(., signature = )` and `eval(debugcall(print(myclassedobj)))`
 - S3 and S4 dispatch aware debugging.
   - Masks the weird .local thing function shenanigans you got in S4 method debugging at the time.
 
-### Some things to keep in mind about this success story
+## Some things to keep in mind about this success story
 - I worked (as my job) with Michael Lawrence at Genentech during this time
   - He had just been elected to R-core
 - 20+ comment conversation on bugzilla about it
   - 4 distinct versions of the patch
   
-### More context
+## More context
 - I disagreed with Michael and Martin about design/API for `debugcall`
   - My patches after the first iteration implemented their preferred API
-- It was accepted, but not until after feature freeze for the upcoming version of R
-  - This meant it remained exclusive to R devel for ~a year until the next primary release
-- Patch was still further refactored by Michael in the process of committing it into the R sources
+- Accepted, but not until after feature freeze
+  - Remained in R-devel only for nearly a year 
+- Patch was still further refactored by Michael in the process
 
-## Circa 2016 - 2019  - The ALTREP Years
-### The Proposal
+# Circa 2016 - 2019  - The ALTREP Years
+## The Proposal
 - Proposed ALTREP at DSC 2016 (research conference/R-core meeting)
   - Was in contact with Luke before meeting, had informal interest
   - Accepted as a way forward following meeting
   - Was proposing enormous internal change - "Backwards Compatible" were first two words in talk title.
   
-### Implementation 2017-2018
+## Implementation 2017-2018
 
 - My proof of concept was a type of vector that was a "window" to another vector's data
   - "Worked" but didn't respect R's copy on write semantics
@@ -145,53 +144,48 @@ Take away points:
 - Luke asked that Michael review my code internally (we were still both at Genentech) before submitting
   - This was hard to hear but is understandable.
 
-### Post Inclusion 2019
+## Post Inclusion 2019
 - I've submitted several accepted patches which implement or further ALTREP support in the R internals
   - Some directly to Luke, most via Bugzilla
 
-### Take Away
+## Take Away
 
-- Submitting code to R-core members should be very mature
+- Code submitted to R-core members should be very mature
   - This is difficult, comes with practice somewhat
 	- Code review may be painful but is a great tool to get better
   - R-core collectively have little time spread across
 	- their own work
-	- Teaching or day-job duties
-	- all collaborations/patches they are currently involved with
-  
-## Take Away Points
-- Members of R-core are open to significant collaboration, but
-  - Their time is scarce and extremely precious
-  - Significant chunks of code take serious work from them to vet
+	- Teaching or day-job duties 
 
-## Circa 2020 - Heady Days
-### Making `head()`s or `tail()`s of Large Rectangular Things
-- Requested as change by Michael Chirico on R-devel
-- Backwards Compatible form proposed by me on R-devel
+# Circa 2020 - Heady Days
+## Making `head()`s or `tail()`s of Large Rectangular Things
+- Make head take rectangular slice rather than only in rows
+  - Requested as change by Michael Chirico on R-devel
+  - Backwards Compatible form proposed by me on R-devel
 
-### The Patch
+## The Patch
 - I propose patch
   - Passed all R's tests (I had learned)
   - "quite a bit of breakage on CRAN" - Martin Maechler
 
-### The Patch Cont
+## The Patch Cont
 - Martin requested I not submit more code, as he was iterating on a local copy to track down and fix CRAN breakages
 
-### Suharto Anggono 
+## Suharto Anggono 
 - Suggested numerous changes to the patch
   - This was frustrating, but
   - He correctly identified multiple flaws in initial versions of the patch
   - Martin agreed with him on some of the coding style/implementation changes, not on others
 
-### Take Away Points
+## Take Away Points
 - Patches are not your baby
   - Critiques can feel like attacks but better patches make R better.
   - Learn from this type of feedback
 - It is often easier for R-core members to make changes themselves than accept/iterate on patches
 
 
-## Circa 2020-2021 - Duplicated Efforts
-### (Significant) speedup to duplicated/unique/etc for sorted ALTREPs
+# Circa 2020-2021 - Duplicated Efforts
+## (Significant) speedup to duplicated/unique/etc for sorted ALTREPs
 - Large chunk of code
 - I Partially-fully implemented it multiple times
   - Bug fixes
@@ -199,18 +193,18 @@ Take away points:
   - Extremely exhaustive testing script
 - All *before* even initial submission on bugzilla
 
-### Luke was focused on the Native Pipe
+## Luke was focused on the Native Pipe
 - He didn't have time to closely vet hundreds of lines of unsolicited C code
 - Patch sat in bugzilla and I waited
   - Not personal, Luke just didn't have bandwidth
 
-### Enter Michael Lawrence
+## Enter Michael Lawrence
 - Contacted me and collaborated on getting the patch in
   - Asked me to formalize my test script into unit tests (oops, duh!)
   - Got it in, we hoped in time for release, but it turned out not
 	- Will be in next release assuming no problems identified
 
-### Take Away Points
+## Take Away Points
 - Sometimes a suggestion/patch not being taken up has nothing to do with the suggestion
   - Especially when it was unsolicited
 - Never submit a significant code change without regression tests
@@ -218,57 +212,142 @@ Take away points:
 
 
 
-## Overall Take Always
-### No One is Perfect ... **But**
-- As external collaborators with R-core members
-  - When making work for them its our job to make as little as possible
+# Overall Take Always
+## No One is Perfect ... **But**
+- When collaborating with R-core
+  - Make as little work for them as possible
   - Be respectful, not demanding. 
   - Sometimes the answer is no, even if you still think the idea is good
 	- Even if the idea **is** good
 	- If you cant accept that this isn't the right game for you to play
   - Never "shoot from the hip", each change is a change 
 
-### Test, test, test
-- Always test your patches via the full battery of R's `make check-devel` *before submission*
+## Test, test, test
+- Always test patches with `make check-devel` *before submission*
 - Submit some form of testing/confirmation
   - Test script that R-core can consider and add as formal tests
 	- Note if you don't have this, you're not ready to submit
   - Formal tests, sometimes, but these take a lot of care in designing
 
 
-# Contributing to R
-## No patches yet
-- Discuss Tomas and Luke's blog-posts
+# Contributing to R - No Patches Yet
 
-### Confirming bugs
+## Confirming bugs
 
-### Generating reproducible examples which **only** use base packages
+- Does reported issue present for you?
+  - Particularly if on different OS than initial report
 
-### Careful bug analysis
+## Generating reproducible examples which **only** use base packages
 
-**Code Analysis Practicum 1?**
+- Are any non-base packages loaded by example code
+- Can you construct an only-base-R version?
+  - If impossible, likely a package bug
+  
 
-## Submitting Bugs
-### Confirm it's present in up-to-date R-devel
 
-### Confirm it's a bug in R itself
+## Careful bug analysis
+
+- This is essentially debugging
+  - `debug` `debugonce` `trace` and `options(error=recover)` are your friends
+
+
+
+# **Code Analysis Practicum**
+
+## Start R In Your Docker Containers And Run
+
+`hist(c(1, 1, 1, 1 + 1e-15, 2), breaks="FD")`
+
+# Code Analysis Practicum Discussion
+
+## What did you find?
+
+- Discussion with participants
+
+## The Issue `pretty.default` got a value it didn't like
+- n is "invalid" 
+  - What does that mean?
+  - what does the n argument do for pretty (/pretty.default)?
+	- what kind of value *should* it have? 
+
+## Invalid `n` - What does that mean?
+
+The warning was a clue
+
+- What does it tell us?
+
+## Ok, `n` Was Crazy Big - how did it get that way?
+
+- `pretty.default` was passed `n = breaks`
+  - from in what?
+
+## `hist.default` and `breaks`
+
+What part of `hist.default` is actually generating the huge value when called as `hist(., breaks="FD")`
+
+## nclass.FD - So what is the problem?
+
+```
+> nclass.FD
+function (x) 
+{
+    h <- stats::IQR(x)
+    if (h == 0) 
+        h <- stats::mad(x, constant = 2)
+    if (h > 0) 
+        ceiling(diff(range(x))/(2 * h * length(x)^(-1/3)))
+    else 1L
+}
+```
+
+
+## Ah. It Is Dividing By
+
+An extremely small (essentially zero) number
+
+# What Now?
+
+## Well That's Complicated
+
+- Optimal histogram construction is actually difficult
+- FD is a published alogrithm
+  - Users are specifically requesting it via `breaks="FD"`
+
+## Martin With More On Why Its Complicated
+
+## Take Away Lessons
+
+- Code analysis can be subtle
+- Successful code analysis doesn't always tell us the fix
+- Serious stat/math knowledge is required to touch some parts of R
+- Even if you don't have them, you can still help
+
+
+
+
+# Submitting Bugs
+## Confirm it's present in up-to-date R-devel
+
+Real bugs in your older version of R don't need to be reported if they are fixed in R-devel
+
+## Confirm it's a bug in R itself
 Run it
 - in plain R (no RStudio or other IDE)
 - with no non-base/non-recommended packages loaded
 
-### Within R isolate it as much as you can
+## Within R isolate it as much as you can
 - To an R function which hits C code, or to the actual offending pure-R function
 - Bonus points if you can (correctly) narrow it down further to which C function and why its choking
 
-### Search bugzilla for if it has already been reported
+## Search bugzilla for if it has already been reported
 
-### (obtain bugzilla account and) Submit bug
+## (obtain bugzilla account and) Submit bug
 
 # Possibly Patches (but Still Probably Not)
 
 
 # R-core's Engineering Philosophy (as my interactions with them have lead me to understand it)
-### R's Maintenance/Design Philosophy
+## R's Maintenance/Design Philosophy
 - Backwards compatability is **very** important
 - Anything that can go in a package, should
   - At **least** as a testing/maturation stage
@@ -278,7 +357,7 @@ Run it
   - Whether this is optimal is not relevant, it is the existing reality
   - Means convincing one R-core member usually enough
 
-### R's Maintenance/Design Philosoph Con't
+## R's Maintenance/Design Philosoph Con't
 
 - Probably no new Recommended pkgs, ever (- Luke Tierney)
   - Popularity again will not change this
@@ -292,7 +371,7 @@ Run it
 
 
   
-### So (for your own sake and R-core's) Do Not
+## So (for your own sake and R-core's) Do Not
 - Start with feature additions
 - Submit patches which change existing (non-bug) behavior without hearing from R-core they are interested
   - You not agreeing with the documented existing behavior does not make something a bug
@@ -314,18 +393,24 @@ Run it
   - This means you must deeply, fully understand what the relevant function/system is doing
 
 # Code Patches
-## Do Not Submit
-- patches which contains a purely-whitespace change
-  - **check this** before you submit
-- patches whose diff file you have not actually looked at
-- patches that do not update documentation - as necessary - to reflect your changes
-- patches which do not include unit/regression tests as appropriate
-- **patches you have not personally tested the exact diff file you are submitting against R-devel/trunk**
-  - make check-devel in the R build directory
-- **patches which bundle enhancements (even related ones) with bug fixes**
-- **patches which bundle multiple bug fixes which are not inextricably linked**
 
-## Do
+## Always
+
+- View the actaul diff before submission
+  - Should be **no** whitespace-only changes
+- Consider/try to update documentation to reflect any changes
+- **Test the exact diff file you are submitting using R-devel/trunk**
+  - `make check-devel` after building R with your patch applied
+- Provide test script/code and/or added unit tests
+
+## Avoid
+
+- Patches which bundle enhancements with bug fixes
+  - Even when they're related
+- Patches which bundle multiple separable bug fixes
+- Breaking backwards compatibility in anyway way
+  - Unless you've heard from R-core member that it is desired
+  
 
 # Feature Additions
 ## Filing Wishlist items in bugzilla
@@ -341,17 +426,31 @@ Run it
 ## Solicited/interest confirmed behavior additions
 - Good to collaborate, voice your opinion
   - R-core member has final say on all matters
-	- this is because they own the code, and any problems with it, once they commit it
+	- they own the code once its in
 - Be prepared to refactor code before submitting it to your collaborator
   - This is generally a good sign, your first pass is rarely your best
-- Test it tow within an inch of its life, then keep going
+- Test it to within an inch of its life, then keep going
   - Think of any possible corner case you can, and test every single one of them
-- If at all possible, have someone else technically skilled in R review it
+- If possible, have someone else technically skilled in R review it
 
-# Add part about why not speedups
+# Purely Speedup Patches
 
-- Maintainability and readable code may oppose extreme optimizations
+## Generally Avoid them
 
+- Need to be confident speeding up one thing doesn't slow down something else
+- Speeding up code *usually* makes it
+  - more complex
+  - less maintainable
+
+## Only if they will make a real difference
+
+- Making something that takes 2 nanoseconds take .5 nanoseconds
+  - Speedup of 4x
+  - Only matters if that thing happens **massively often** in real code
+- Making something that took 10 seconds take 7 seconds 
+  - 1.4x speedup
+  - Likely saves more actual time in a real script
+  
 
 # Finding your way around a checkout of the R sources
 ## Finding tests
