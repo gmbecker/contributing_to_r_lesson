@@ -524,3 +524,9 @@ Fixed by MM, in `svn rev 80537`
 svn ci -m'Fix PR#18129 (M.Chirico) to use _G() macro consistently in RGui'
      src/extra/graphapp/metafile.c src/extra/graphapp/printer.c
 ```
+
+### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18143 by Sebastian Meyer
+ *debugcall() example fails after loading mgcv (or survival)*
+
+- *very* new bug report from Tue, July 6, 2021 (yesterday!)
+- Have seen `debugcall()` above (!).
