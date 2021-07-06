@@ -40,10 +40,12 @@ Please read or otherwise be familiar with the subjects covered in the following:
 
 ## R documentation ('Rd') syntax (not roxygen2)
 [Writing R Documentation](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files) (Rd Syntax for package authors)
+
 [Parsing Rd Files - Duncan Murdoch](https://developer.r-project.org/parseRd.pdf) (Rd Syntax Specification section)
 
 ## S3 Methods
 Help pages [UseMethod](https://stat.ethz.ch/R-manual/R-patched/library/base/html/UseMethod.html) and [methods](https://stat.ethz.ch/R-manual/R-patched/library/base/html/methods.html)
+
 [(S3) Object oriented Programming](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Object_002doriented-programming)
 
 ## Search Paths and NAMESPACEs
@@ -63,6 +65,7 @@ Help pages [UseMethod](https://stat.ethz.ch/R-manual/R-patched/library/base/html
 ## (Optional but helpful) Regular Expressions (not stringi/stringr)
 
 [Regular Expressions](https://cheatography.com/davechild/cheat-sheets/regular-expressions/)
+
 R help pages [regex](https://stat.ethz.ch/R-manual/R-patched/library/base/html/regex.html) and [grep](https://stat.ethz.ch/R-manual/R-patched/library/base/html/grep.html)
 
 # Docker and Rocker
