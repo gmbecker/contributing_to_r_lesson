@@ -3,7 +3,7 @@ Gabriel Becker and Martin Maechler
 
 ## Code of Conduct
 
-The [useR2021 conference Code of Conduct](https://user2021.r-project.org/participation/coc/)
+The [useR! 2021 conference Code of Conduct](https://user2021.r-project.org/participation/coc/)
  applies to all aspects of this tutorial and will be enforced throughout.  By joining the
  tutorial session you agree to abide by the code of conduct at all times in
  both the main tutorial call and all break-out 'rooms'. 
@@ -13,7 +13,7 @@ attention of Gabriel, Martin, or one of the helpers in attendence.
 
 ## Zoom
 
-The tutorial - like all of the live aspects of the useR!2021 virtual
+The tutorial - like all of the live aspects of the useR! 2021 virtual
 conference - will take place on **Zoom**. Unlike most sessions in the
 conference, the tutorial will be a zoom meeting, not a webinar. As
 such it cannot be attended via web browser. **Please ensure you have
@@ -38,8 +38,13 @@ Please read or otherwise be familiar with the subjects covered in the following:
 [Accessing R Sources - Uwe Ligges](https://www.r-project.org/doc/Rnews/Rnews_2006-4_Ligges_AccessSource.pdf), an excerpt from
 [R News 2006-4](https://cran.r-project.org/doc/Rnews/Rnews_2006-4.pdf); R Help Desk, p.43--45.
 
-## R documentation syntax (not roxygen2)
+## R documentation ('Rd') syntax (not roxygen2)
+[Writing R Documentation](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files) (Rd Syntax for package authors)
 [Parsing Rd Files - Duncan Murdoch](https://developer.r-project.org/parseRd.pdf) (Rd Syntax Specification section)
+
+## S3 Methods
+Help pages [UseMethod](https://stat.ethz.ch/R-manual/R-patched/library/base/html/UseMethod.html) and [methods](https://stat.ethz.ch/R-manual/R-patched/library/base/html/methods.html)
+[(S3) Object oriented Programming](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Object_002doriented-programming)
 
 ## Search Paths and NAMESPACEs
 
@@ -58,7 +63,7 @@ Please read or otherwise be familiar with the subjects covered in the following:
 ## (Optional but helpful) Regular Expressions (not stringi/stringr)
 
 [Regular Expressions](https://cheatography.com/davechild/cheat-sheets/regular-expressions/)
-
+R help pages [regex](https://stat.ethz.ch/R-manual/R-patched/library/base/html/regex.html) and [grep](https://stat.ethz.ch/R-manual/R-patched/library/base/html/grep.html)
 
 # Docker and Rocker
 
