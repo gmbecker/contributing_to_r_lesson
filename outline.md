@@ -470,7 +470,7 @@ Run it
 
 ### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17167
 
-- `is.ratetable()` inconsistent between verbose=TRUE and verbose=FALSE
+- `is.ratetable()` inconsistent between `verbose=TRUE` and `verbose=FALSE`
 - Not an R bug
   - Good practice for recognizing that
   
@@ -516,14 +516,28 @@ Fixed by MM, in `svn rev 80537`
     doc/NEWS.Rd src/library/tools/R/translations.R
 ```
 
-### C code: https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18129  by Michael Chirico
+### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18129  by Michael Chirico
 
+- Code/Bug analysis -- what can you say?
+- between C code and documentation
 - Fixed by MM, in `svn rev 80542`
+
 
 ``` 
 svn ci -m'Fix PR#18129 (M.Chirico) to use _G() macro consistently in RGui'
      src/extra/graphapp/metafile.c src/extra/graphapp/printer.c
 ```
+
+
+### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18140
+ *`[.data.frame`: subsetting data frame with factor column: additional class not stripped*
+
+- new, from  1 Jul 2021
+- can you reproduce
+- is this a bug?   If yes, _where_, if not, _why_ ?
+- what do the docs say?
+
+
 
 ### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18143 by Sebastian Meyer
  *debugcall() example fails after loading mgcv (or survival)*
