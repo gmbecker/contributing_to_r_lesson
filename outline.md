@@ -533,7 +533,7 @@ svn ci -m'Fix PR#18129 (M.Chirico) to use _G() macro consistently in RGui'
  *`[.data.frame`: subsetting data frame with factor column: additional class not stripped*
 
 - new, from  1 Jul 2021
-- can you reproduce
+- can you reproduce?
 - is this a bug?   If yes, _where_, if not, _why_ ?
 - what do the docs say?
 
