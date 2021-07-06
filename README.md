@@ -1,4 +1,4 @@
-# Contributing to R - Participant Instructions useR2021 Tutorial
+# Contributing to R - Participant Instructions useR! 2021 Tutorial
 Gabriel Becker and Martin Maechler
 
 ## Code of Conduct
