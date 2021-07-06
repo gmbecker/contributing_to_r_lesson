@@ -34,7 +34,7 @@ This tutorial will assume certain baseline knowledge about how R works in order 
 
 Please read or otherwise be familiar with the subjects covered in the following:
 
-## Navigating the R soources:
+## Navigating the R sources:
 [Accessing R Sources - Uwe Ligges](https://www.r-project.org/doc/Rnews/Rnews_2006-4_Ligges_AccessSource.pdf), an excerpt from
 [R News 2006-4](https://cran.r-project.org/doc/Rnews/Rnews_2006-4.pdf); R Help Desk, p.43--45.
 
