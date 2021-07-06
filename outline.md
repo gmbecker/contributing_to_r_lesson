@@ -12,7 +12,7 @@ output:
 - R-core from the start (1997) and R-Foundation Board.
   - Co-Creator (with Doug Bates) and maintainer of Matrix, cluster, robustbase, Rmpfr, ..
 - ETH Zurich, adjoint Prof in Math Stats
-- ESS Project Lead
+- [ESS (Emacs Speaks Statistics)](https://ess.r-project.org/) Project Lead
 
 
 ## Gabriel Becker - Frequent Collaborator with R-core
@@ -234,22 +234,20 @@ Take away points:
 
 ## Confirming bugs
 
-- Does reported issue present for you?
+- Is the reported issue present for you?
   - Particularly if on different OS than initial report
 
 ## Generating reproducible examples which **only** use base packages
 
-- Are any non-base packages loaded by example code
+- Are any non-base packages loaded by example code?  (!!)
 - Can you construct an only-base-R version?
-  - If impossible, likely a package bug
-  
+  - If that fails it is likely a *package* bug, i.e., *not* a bug in R.
 
 
 ## Careful bug analysis
 
 - This is essentially debugging
   - `debug` `debugonce` `trace` and `options(error=recover)` are your friends
-
 
 
 # **Code Analysis Practicum**
@@ -472,12 +470,57 @@ Run it
 
 ### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17167
 
-- is.ratetable inconsistent between verbose=TRUE and verbose=FALSE
+- `is.ratetable()` inconsistent between verbose=TRUE and verbose=FALSE
 - Not an R bug
   - Good practice for recognizing that
   
 ### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16940
 
-- diff on difftime object losing unit
+- `diff()` on `"difftime"` object losing unit
 - involves S3 dispatch/methods
 - fix is small
+
+
+### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17124  by Alex Bertram 
+
+- about `eval(substitute(...))`, environments; patch proposal in 2016,
+  analysis by Sebastian Meyer in 2020.
+
+#### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18041
+
+- `checkRdaFiles()$version` bug, short and simple
+- Needs anything between R 3.5.0 and 4.0.3 to reproduce the problem.
+
+
+### Recent issues, still visible in *current* R (4.0.x, 4.1.0)
+
+### `substring(.., last=*)` discussion / report on the R-devel mailing list
+- Search for "Should last default to" / "for substring()" in the 
+  [R-devel list archives](https://stat.ethz.ch/pipermail/r-devel/2021-June/)
+- Look at the first 2--3 mails; what do you think? how would you solve it?
+- Maybe look at the `svn rev 80536 (June 21)` which fixes the allocation
+ bug *and* a wrong _comment_ in the C source (`main/character.c`)
+ 
+```
+ svn ci -m'update with docs (WRE): max nchar() = 2^32-1; thanks to Brodie Gaslam (on R-devel list)'
+	 src/include/R_ext/RS.h src/main/character.c
+```
+
+
+### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18123  by Michael Chirico
+
+Fixed by MM, in `svn rev 80537`
+
+```
+  svn ci -m'grDevices/src/cairo/* messages are now up for translation'
+    doc/NEWS.Rd src/library/tools/R/translations.R
+```
+
+### C code: https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18129  by Michael Chirico
+
+- Fixed by MM, in `svn rev 80542`
+
+``` 
+svn ci -m'Fix PR#18129 (M.Chirico) to use _G() macro consistently in RGui'
+     src/extra/graphapp/metafile.c src/extra/graphapp/printer.c
+```
