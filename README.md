@@ -142,7 +142,7 @@ R-3.3.2/configure
 
 We will explore and use portions of these sources in the practical portions of the tutorial.
 
-Ensure these files are persisted by closing the docker container (e.g. via `exit`, and invoking it again to ensure the files are still there:
+Ensure these files are persistent by closing the docker container (e.g. via `exit`, and invoking it again to ensure the files are still there:
 
 ```
 root@788c85efe291:/# exit
