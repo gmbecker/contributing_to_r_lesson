@@ -71,7 +71,7 @@ classoption: "aspectratio=1610"
   - ~110 members
   - not super active - **yet***
 - (early ongoing development) R Developer's Guide
-  - Saranjeet Kaur under Heather Turner and Michael Lawrence
+  - Saranjeet Kaur working with Heather Turner and Michael Lawrence
   - https://github.com/forwards/rdevguide
 
 
