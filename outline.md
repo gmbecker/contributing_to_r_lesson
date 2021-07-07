@@ -26,7 +26,8 @@ classoption: "aspectratio=1610"
   - `sessionInfo()` returns RNG information when not the default, with Martin Maechler
   - `which()`  long vector and ALTREP support, with Martin Maechler
   - `ifelse()` refactor for significant speedup with Kurt Hornik
-  - `duplicated()`/`unique()`/`anyDuplicated()` sortedness-aware ALTREP fastpass (r-devel only) with Michael Lawrence
+  - `duplicated()`/`unique()`/`anyDuplicated()` sortedness-aware ALTREP
+    fastpass (for now in R-devel, only) with Michael Lawrence
 
 # Learning How to Contribute to R
 ## The Goal
@@ -197,7 +198,7 @@ Take away points:
 # Circa 2020 - Heady Days
 ## Making `head()`s or `tail()`s of Large Rectangular Things
 - Make head take rectangular slice rather than only in rows
-  - Requested as change by Michael Chirico on R-devel
+  - Requested as change by Michael Chirico on R-devel (the **mailing list**).
   - Backwards Compatible form proposed by me on R-devel
 
 ## The Patch
@@ -543,7 +544,9 @@ R's Bugzilla: https://bugs.r-project.org/bugzilla/
 - Try to get another R-core member to overrule one whose decision you don't like
   - I don't know of any times where this happened. Lets keep it that way
 	- I seriously doubt they would be amused (or that it would work anyway)
-  - This is different than engaging in ongoing discussions on, e.g., r-devel
+  - This is different than engaging in ongoing discussions on, e.g., 
+    [r-devel](https://stat.ethz.ch/mailman/listinfo/r-devel), **the**
+    mailing list on  *R Development*.
 
 # Documentation Patches
 ## Typo reporting/fixes always welcome
