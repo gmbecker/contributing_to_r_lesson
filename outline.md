@@ -1,7 +1,7 @@
 ---
 title: Contributing to R
 author: Gabriel Becker and Martin Maechler
-output: 
+output:
   beamer_presentation:
      slide_level: 2
 classoption: "aspectratio=1610"
@@ -29,7 +29,7 @@ classoption: "aspectratio=1610"
 
 # Learning How to Contribute to R
 ## The Goal
-- **Is** 
+- **Is**
   - Helping R
   - By helping R-core maintain it
   - Thus benefiting ourselves and the larger R community
@@ -45,13 +45,17 @@ classoption: "aspectratio=1610"
 
 # The Shoulders of Giants - Previous/Ongoing Outreach and Engagement
 
-## R-core Developer Blog
+## The R Blog (R-core \& R Foundation)
+#### https://developer.r-project.org/Blog/public/
 
-![](rblog1.png)
+[2019-10:](https://developer.r-project.org/Blog/public/2019/10/09/r-can-use-your-help-reviewing-bug-reports/)
+![Reviewing bug reports](rblog_2019-10_reviewBugReps.png)
 
-![](rblog2.png)
+[2019-12:](https://developer.r-project.org/Blog/public/2019/12/16/thanks-for-reviewing-bug-reports/)
+![Thanks for reviewing](rblog_2019-12_ThanksRev.png)
 
-![](rblog3.png)
+[2021-04:](https://developer.r-project.org/Blog/public/2021/04/28/r-can-use-your-help-testing-r-before-release/)
+![Testing R before release](rblog_2021-04_TestingR.png)
 
 ## R-Foundation FORWARDS - R Contribution Working Group
 
@@ -61,8 +65,8 @@ classoption: "aspectratio=1610"
 - R Foundation members
   - Jenny Bryan, Di Cook
 - R community  members you may have heard of
-  - Kara Woo, Amelia McNamera, Toby Hocking, Michael Chirico, Brodie Gasalm, Sebastian Meyer
-  - And many you likely will soon 
+  - Kara Woo, Amelia McNamara, Toby Hocking, Michael Chirico, Brodie Gaslam, Sebastian Meyer
+  - And many you likely will soon hear of
 
 
 ## R Contribution Working Group
@@ -80,7 +84,7 @@ classoption: "aspectratio=1610"
 ## PR#15253 - `identify()` Hanging
 - Simon Anders posted a reproducible example
 - I diagnosed the problem:
-  - Hang was in `locator` C function not identify logic per se. 
+  - Hang was in `locator` C function not identify logic per se.
 - I wrote and submitted a proposed patch
   - No reponse on bugzilla other than bug status changed to closed-fixed
   - Could see changes in trunk; patch accepted
@@ -152,12 +156,12 @@ Take away points:
   - He had just been elected to R-core
 - 20+ comment conversation on bugzilla about it
   - 4 distinct versions of the patch
-  
+
 ## More context
 - I disagreed with Michael and Martin about design/API for `debugcall`
   - My patches after the first iteration implemented their preferred API
 - Accepted, but not until after feature freeze
-  - Remained in R-devel only for nearly a year 
+  - Remained in R-devel only for nearly a year
 - Patch was still further refactored by Michael in the process
 
 # Circa 2016 - 2019  - The ALTREP Years
@@ -166,7 +170,7 @@ Take away points:
   - Was in contact with Luke before meeting, had informal interest
   - Accepted as a way forward following meeting
   - Was proposing enormous internal change - "Backwards Compatible" were first two words in talk title.
-  
+
 ## Implementation 2017-2018
 
 - My proof of concept was a type of vector that was a "window" to another vector's data
@@ -187,7 +191,7 @@ Take away points:
 	- Code review may be painful but is a great tool to get better
   - R-core collectively have little time spread across
 	- their own work
-	- Teaching or day-job duties 
+	- Teaching or day-job duties
 
 # Circa 2020 - Heady Days
 ## Making `head()`s or `tail()`s of Large Rectangular Things
@@ -203,7 +207,7 @@ Take away points:
 ## The Patch Cont
 - Martin requested I not submit more code, as he was iterating on a local copy to track down and fix CRAN breakages
 
-## Suharto Anggono 
+## Suharto Anggono
 - Suggested numerous changes to the patch
   - This was frustrating, but
   - He correctly identified multiple flaws in initial versions of the patch
@@ -248,11 +252,11 @@ Take away points:
 ## No One is Perfect ... **But**
 - When collaborating with R-core
   - Make as little work for them as possible
-  - Be respectful, not demanding. 
+  - Be respectful, not demanding.
   - Sometimes the answer is no, even if you still think the idea is good
 	- Even if the idea **is** good
 	- If you cant accept that this isn't the right game for you to play
-  - Never "shoot from the hip", each change is a change 
+  - Never "shoot from the hip", each change is a change
 
 ## Test, test, test
 - Always test patches with `make check-devel` *before submission*
@@ -278,15 +282,50 @@ Take away points:
 
 ## Careful bug analysis
 
-- This is essentially debugging
-  - `debug` `debugonce` `trace` and `options(error=recover)` are your friends
+- Maybe *experiment* : systematically try different invocations of the
+  function: which results are good, which not?
+
+- Read the help page of that function **carefully**
+
+- But then, it is essentially **debugging** :
+  - `traceback()`
+  - `debug(_<fn>_)`
+  - `debugonce(_<fn>_)`
+  - `trace(_<fn>_, ..)`   and
+  - `options(error=recover)`   are your friends
+
 
 
 # **Code Analysis Practicum**
 
-## Start R In Your Docker Containers And Run
+## Start R In Your Docker Containers (`R version 3.3.2 (2016-10-31)`)
+and run
 
-`hist(c(1, 1, 1, 1 + 1e-15, 2), breaks="FD")`
+```
+ hist(c(1, 1, 1, 1 + 1e-15, 2), breaks="FD")
+```
+
+## R (3.3.2) console:
+```
+R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+...
+
+> hist(c(1, 1, 1, 1 + 1e-15, 2), breaks="FD")
+Warning in pretty.default(range(x), n = breaks, min.n = 1) :
+  NAs introduced by coercion to integer range
+Error in pretty.default(range(x), n = breaks, min.n = 1) :
+  invalid 'n' argument
+>
+
+> traceback()
+4: pretty.default(range(x), n = breaks, min.n = 1)
+3: pretty(range(x), n = breaks, min.n = 1)
+2: hist.default(c(1, 1, 1, 1 + 1e-15, 2), breaks = "FD")
+1: hist(c(1, 1, 1, 1 + 1e-15, 2), breaks = "FD")
+>
+```
+
 
 # Code Analysis Practicum Discussion
 
@@ -294,11 +333,11 @@ Take away points:
 
 - Discussion with participants
 
-## The Issue `pretty.default` got a value it didn't like
-- n is "invalid" 
+## The Issue: `pretty.default` got a value it didn't like
+- n is "invalid"
   - What does that mean?
   - what does the n argument do for pretty (/pretty.default)?
-	- what kind of value *should* it have? 
+	- what kind of value *should* it have?
 
 ## Invalid `n` - What does that mean?
 
@@ -319,12 +358,12 @@ What part of `hist.default` is actually generating the huge value when called as
 
 ```
 > nclass.FD
-function (x) 
+function (x)
 {
     h <- stats::IQR(x)
-    if (h == 0) 
+    if (h == 0)
         h <- stats::mad(x, constant = 2)
-    if (h > 0) 
+    if (h > 0)
         ceiling(diff(range(x))/(2 * h * length(x)^(-1/3)))
     else 1L
 }
@@ -394,13 +433,13 @@ Run it
 - Proposing new features creates work for them
   - Even if you submit a patch
 	- Even if the patch you submit is perfect
-  - doesn't mean never do it, but be cognizant 
+  - doesn't mean never do it, but be cognizant
 - Helping squash bugs *saves* them work
   - Even with no patch
 	- sometimes especiaily with no patch
 
 
-  
+
 ## So (for your own sake and R-core's) Do Not
 - Start with feature additions
 - Submit patches which change existing (non-bug) behavior without hearing from R-core they are interested
@@ -440,7 +479,7 @@ Run it
 - Patches which bundle multiple separable bug fixes
 - Breaking backwards compatibility in anyway way
   - Unless you've heard from R-core member that it is desired
-  
+
 
 # Feature Additions
 ## Filing Wishlist items in bugzilla
@@ -477,10 +516,10 @@ Run it
 - Making something that takes 2 nanoseconds take .5 nanoseconds
   - Speedup of 4x
   - Only matters if that thing happens **massively often** in real code
-- Making something that took 10 seconds take 7 seconds 
+- Making something that took 10 seconds take 7 seconds
   - 1.4x speedup
   - Likely saves more actual time in a real script
-  
+
 
 # Finding your way around a checkout of the R sources
 ## Finding tests
@@ -505,7 +544,7 @@ Run it
 - `is.ratetable()` inconsistent between `verbose=TRUE` and `verbose=FALSE`
 - Not an R bug
   - Good practice for recognizing that
-  
+
 ## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16940
 
 - `diff()` on `"difftime"` object losing unit
@@ -515,7 +554,7 @@ Run it
 
 ## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17124
 
-by Alex Bertram 
+by Alex Bertram
 
 
 - Present 3.3.2
@@ -573,12 +612,12 @@ by Alex Bertram
 # Recent issues, still visible in *current* R (4.0.x, 4.1.0)
 
 ## `substring(.., last=*)` discussion / report on the R-devel mailing list
-- Search for "Should last default to" / "for substring()" in the 
+- Search for "Should last default to" / "for substring()" in the
   [R-devel list archives](https://stat.ethz.ch/pipermail/r-devel/2021-June/)
 - Look at the first 2--3 mails; what do you think? how would you solve it?
 - Maybe look at the `svn rev 80536 (June 21)` which fixes the allocation
  bug *and* a wrong _comment_ in the C source (`main/character.c`)
- 
+
 ```
  svn ci -m'update with docs (WRE): max nchar() = 2^32-1; thanks to Brodie Gaslam (on R-devel list)'
 	 src/include/R_ext/RS.h src/main/character.c
@@ -601,7 +640,7 @@ Fixed by MM, in `svn rev 80537`
 - Fixed by MM, in `svn rev 80542`
 
 
-``` 
+```
 svn ci -m'Fix PR#18129 (M.Chirico) to use _G() macro consistently in RGui'
      src/extra/graphapp/metafile.c src/extra/graphapp/printer.c
 ```
