@@ -303,9 +303,19 @@ Take away points:
 ## Start R In Your Docker Containers (`R version 3.3.2 (2016-10-31)`)
 (or R 3.3.3, 3.4.0, 3.4.1, but not newer) and run
 
+
+<!-- space  just for formatting the slide -->
 ```
+
+
+
+
+
+
+
  hist(c(1, 1, 1, 1 + 1e-15, 2), breaks="FD")
 ```
+
 
 ## R (3.3.2) console:
 ```
@@ -347,7 +357,7 @@ The warning was a clue
 
 - What does it tell us?
 
-## Ok, `n` Was Crazy Big - how did it get that way?
+## Okay, `n` was crazy big - how did it get that way?
 
 - `pretty.default` was passed `n = breaks`
   - from in what?
@@ -369,10 +379,16 @@ function (x)
         ceiling(diff(range(x))/(2 * h * length(x)^(-1/3)))
     else 1L
 }
+
+
+
+
+
+
 ```
 
 
-## Ah. It Is Dividing By
+## Ah. It is dividing by
 
 An extremely small (essentially zero) number
 
@@ -380,11 +396,73 @@ An extremely small (essentially zero) number
 
 ## Well That's Complicated
 
-- Optimal histogram construction is actually difficult
-- FD is a published algorithm
-  - Users are specifically requesting it via `breaks="FD"`
+- Optimal *automatic* histogram construction is actually difficult
+- The `nclass*()` functions are the result of research and publications in
+  (applied and mathematical) statistics with goal
 
-## Martin With More On Why Its Complicated
+>   find an *optimal number of histogram bins*
+
+- FD is a published algorithm ('Friedman-Diaconis') ( => *read* the help page!)
+  - Users specifically request it via `breaks="FD"`
+
+### It's even more complicated (Martin M.)
+
+- Experience of an "extremist" (MM): Published algorithms almost *never*
+  take into account the most extreme boundary cases.
+
+- But good scientific software such as R  *should* deal with these cases,
+  ideally _optimally_, but at least _gracefully_
+
+## Complicated -- 2 --
+
+Originally, the function was simply
+
+```
+nclass.FD <- function(x)
+{
+    r <- as.vector(quantile(x, c(0.25, 0.75)))
+    h <- 2 * (r[2] - r[1]) * length(x)^(-1/3)
+    ceiling(diff(range(x))/h)
+}
+```
+introduced for R 1.4.0 (2001-12-19), stemming from `{MASS}` pkg, where
+it can be found in the CRAN archives of `VR`, in file
+`VR/MASS/R/hist.scott.R`, dated 1999-04-05 with first 2 lines
+
+```
+# file MASS/hist.scott.q
+# copyright (C) 1994-8 W. N. Venables and B. D. Ripley
+```
+
+so this *is* from the beginning of statistical computing with **S** (the
+"mother" of **R**).
+
+## `hist()`  and  `nclass.FD()` -- more complicated -- 3 --
+
+Note: *not* dealing with case when `h` is exactly zero if the
+1st and 3rd quartiles $Q_1$ and $Q_3$ are equal, e.g. for `x <- c(0, 1,1,1, 99)`:
+in that case, `nclass.FD(x)` returned `Inf` originally.  
+"Consequently", in 2007, there was a change to the R source code:
+
+> r40860 | maechler | 2007-03-21 11:56:55
+>
+> nclass.scott(x), nclass.FD(x) for var(x)==0
+
+which changed the body of `nclass.FD` into
+
+```
+{
+    h <- stats::IQR(x)
+    if(h == 0) h <- stats::mad(x, constant = 2) # c=2: consistent with IQR
+    if (h > 0) ceiling(diff(range(x))/(2 * h * length(x)^(-1/3))) else 1L
+}
+```
+
+- hence the `h == 0` was dealt with, but actually not so smartly,
+- see the Bugzilla `PR #17274` discussion at
+  https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17274
+
+
 
 ## Take Away Lessons
 
