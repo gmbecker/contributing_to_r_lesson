@@ -50,13 +50,13 @@ classoption: "aspectratio=1610"
 #### https://developer.r-project.org/Blog/public/
 
 [2019-10:](https://developer.r-project.org/Blog/public/2019/10/09/r-can-use-your-help-reviewing-bug-reports/)
-![Reviewing bug reports](rblog_2019-10_reviewBugReps.png)
+![Reviewing bug reports](fig/rblog_2019-10_reviewBugReps.png)
 
 [2019-12:](https://developer.r-project.org/Blog/public/2019/12/16/thanks-for-reviewing-bug-reports/)
-![Thanks for reviewing](rblog_2019-12_ThanksRev.png)
+![Thanks for reviewing](fig/rblog_2019-12_ThanksRev.png)
 
 [2021-04:](https://developer.r-project.org/Blog/public/2021/04/28/r-can-use-your-help-testing-r-before-release/)
-![Testing R before release](rblog_2021-04_TestingR.png)
+![Testing R before release](fig/rblog_2021-04_TestingR.png)
 
 ## R-Foundation FORWARDS - R Contribution Working Group
 
@@ -441,8 +441,8 @@ so this *is* from the beginning of statistical computing with **S** (the
 
 Note: *not* dealing with case when `h` is exactly zero if the
 1st and 3rd quartiles $Q_1$ and $Q_3$ are equal, e.g. for `x <- c(0, 1,1,1, 99)`:
-in that case, `nclass.FD(x)` returned `Inf` originally.  
-"Consequently", in 2007, there was a change to the R source code:
+in that case, `nclass.FD(x)` returned `Inf`. "Consequently", in 2007,
+there was a change to the R source code:
 
 > r40860 | maechler | 2007-03-21 11:56:55
 >
@@ -488,9 +488,25 @@ Run it
 - To an R function which hits C code, or to the actual offending pure-R function
 - Bonus points if you can (correctly) narrow it down further to which C function and why its choking
 
-## Search bugzilla for if it has already been reported
+## Search bugzilla: Has the bug already been reported?
+
+R's Bugzilla: https://bugs.r-project.org/bugzilla/
+![Welcome to R Bug Tracking](fig/R_Bugzilla_1_Welcome.png)
+
+## Search for R Bugs (with 'substring')
+
+![Search for R Bugs](fig/R_Bugzilla_2_Search.png)
+
+## List of bug reports with __'substring'__
+
+![Bug List 'substring'](fig/R_Bugzilla_3_Buglist.png)
+
 
 ## (obtain bugzilla account and) Submit bug
+
+- [[`Reporting Bugs`] on sidebar | R home page](https://www.r-project.org/bugs.html)
+
+
 
 # Possibly Patches (but Still Probably Not)
 
@@ -716,14 +732,7 @@ Fixed by MM, in `svn rev 80537`
 - between C code and documentation
 - Fixed by MM, in `svn rev 80542`
 
-
 ```
 svn ci -m'Fix PR#18129 (M.Chirico) to use _G() macro consistently in RGui'
      src/extra/graphapp/metafile.c src/extra/graphapp/printer.c
 ```
-
-## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18143 by Sebastian Meyer
- *debugcall() example fails after loading mgcv (or survival)*
-
-- *very* new bug report from Tue, July 6, 2021 (yesterday!)
-- Have seen `debugcall()` above (!).
