@@ -178,7 +178,7 @@ str(joe_new$email)
 ```
 
 
-### `is.ratetablle` inconsistent between `verbose=TRUE` and `verbose=FALSE`
+### `is.ratetable` inconsistent between `verbose=TRUE` and `verbose=FALSE`
 
 ```
 library(survival)
