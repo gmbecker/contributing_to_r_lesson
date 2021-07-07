@@ -426,7 +426,7 @@ Run it
 
 ## Always
 
-- View the actaul diff before submission
+- View the actual diff before submission
   - Should be **no** whitespace-only changes
 - Consider/try to update documentation to reflect any changes
 - **Test the exact diff file you are submitting using R-devel/trunk**
