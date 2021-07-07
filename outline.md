@@ -4,6 +4,7 @@ author: Gabriel Becker and Martin Maechler
 output:
   beamer_presentation:
      slide_level: 2
+urlcolor: blue
 classoption: "aspectratio=1610"
 ---
 
@@ -35,7 +36,7 @@ classoption: "aspectratio=1610"
   - Thus benefiting ourselves and the larger R community
 - **Is Not**
   - Professional advancement
-  - Personal recognition/fame (though acknowledgement will occur)
+  - Personal recognition/fame (though acknowledgment will occur)
 
 ## We will focus on
 - What kinds of efforts help
@@ -86,7 +87,7 @@ classoption: "aspectratio=1610"
 - I diagnosed the problem:
   - Hang was in `locator` C function not identify logic per se.
 - I wrote and submitted a proposed patch
-  - No reponse on bugzilla other than bug status changed to closed-fixed
+  - No response on bugzilla other than bug status changed to closed-fixed
   - Could see changes in trunk; patch accepted
 
 ## Bitwise Operations For Raw Vectors
@@ -102,8 +103,8 @@ classoption: "aspectratio=1610"
 - Sometimes a patch changing behavior is not the correct fix
   - Even to problems that are real
 
-# Circa 2015 - Icaris Flies With Such Very Sturdy Wings
-## PR#16385 - All logical operaters (silently) behave as `!` when called with 1 argument
+# Circa 2015 - Icarus Flies With Such Very Sturdy Wings
+## PR#16385 - All logical operators (silently) behave as `!` when called with 1 argument
 - Reported By Barry Rowlingson
 -
 ```
@@ -294,12 +295,13 @@ Take away points:
   - `trace(_<fn>_, ..)`   and
   - `options(error=recover)`   are your friends
 
+- *Hint*: during debugging,  Martin's favorite  `ls.str()`  is often useful.
 
 
 # **Code Analysis Practicum**
 
 ## Start R In Your Docker Containers (`R version 3.3.2 (2016-10-31)`)
-and run
+(or R 3.3.3, 3.4.0, 3.4.1, but not newer) and run
 
 ```
  hist(c(1, 1, 1, 1 + 1e-15, 2), breaks="FD")
@@ -333,10 +335,10 @@ Error in pretty.default(range(x), n = breaks, min.n = 1) :
 
 - Discussion with participants
 
-## The Issue: `pretty.default` got a value it didn't like
+## The Issue: `pretty.default()` got a value it didn't like
 - n is "invalid"
   - What does that mean?
-  - what does the n argument do for pretty (/pretty.default)?
+  - what does the `n` argument do for `pretty` (/ `pretty.default`)?
 	- what kind of value *should* it have?
 
 ## Invalid `n` - What does that mean?
@@ -379,7 +381,7 @@ An extremely small (essentially zero) number
 ## Well That's Complicated
 
 - Optimal histogram construction is actually difficult
-- FD is a published alogrithm
+- FD is a published algorithm
   - Users are specifically requesting it via `breaks="FD"`
 
 ## Martin With More On Why Its Complicated
@@ -417,16 +419,16 @@ Run it
 
 # R-core's Engineering Philosophy (as my interactions with them have lead me to understand it)
 ## R's Maintenance/Design Philosophy
-- Backwards compatability is **very** important
+- Backwards compatibility is **very** important
 - Anything that can go in a package, should
   - At **least** as a testing/maturation stage
   - in many cases, indefinitely/"permanently"
   - Popularity in community not generally a counterargument
-- R-core operates on "Individual Iniitiave + Lack of Opposition" model
+- R-core operates on "Individual Initiative + Lack of Opposition" model
   - Whether this is optimal is not relevant, it is the existing reality
   - Means convincing one R-core member usually enough
 
-## R's Maintenance/Design Philosoph Con't
+## R's Maintenance/Design Philosophy Con't
 
 - Probably no new Recommended pkgs, ever (- Luke Tierney)
   - Popularity again will not change this
@@ -436,8 +438,7 @@ Run it
   - doesn't mean never do it, but be cognizant
 - Helping squash bugs *saves* them work
   - Even with no patch
-	- sometimes especiaily with no patch
-
+	- sometimes especially with no patch
 
 
 ## So (for your own sake and R-core's) Do Not
@@ -532,7 +533,7 @@ Run it
 
 # Possible Patch Practicals
 
-## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17150
 
 - as.person not handling multiple emails in the string
 - requires
@@ -588,7 +589,6 @@ by Alex Bertram
 
 
 
-
 ## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18143 by Sebastian Meyer
  *debugcall() example fails after loading mgcv (or survival)*
 
@@ -599,7 +599,6 @@ by Alex Bertram
 
 
 # Other
-
 
 
 
@@ -645,3 +644,8 @@ svn ci -m'Fix PR#18129 (M.Chirico) to use _G() macro consistently in RGui'
      src/extra/graphapp/metafile.c src/extra/graphapp/printer.c
 ```
 
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18143 by Sebastian Meyer
+ *debugcall() example fails after loading mgcv (or survival)*
+
+- *very* new bug report from Tue, July 6, 2021 (yesterday!)
+- Have seen `debugcall()` above (!).
