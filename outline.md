@@ -544,7 +544,7 @@ R's Bugzilla: https://bugs.r-project.org/bugzilla/
 - Try to get another R-core member to overrule one whose decision you don't like
   - I don't know of any times where this happened. Lets keep it that way
 	- I seriously doubt they would be amused (or that it would work anyway)
-  - This is different than engaging in ongoing discussions on, e.g., 
+  - This is different than engaging in ongoing discussions on, e.g.,
     [r-devel](https://stat.ethz.ch/mailman/listinfo/r-devel), **the**
     mailing list on  *R Development*.
 
@@ -620,13 +620,58 @@ R's Bugzilla: https://bugs.r-project.org/bugzilla/
 
 
 # Finding your way around a checkout of the R sources
+
+<!-- As in `README.md`: -->
+[Accessing R Sources - Uwe Ligges](https://www.r-project.org/doc/Rnews/Rnews_2006-4_Ligges_AccessSource.pdf), from
+[R News 2006-4](https://cran.r-project.org/doc/Rnews/Rnews_2006-4.pdf); R Help Desk, p.43ff
+
+_Either_  
+- Get the R *development* *sources* from their `subversion` repository,
+   typically via subversion client `svn` by
+```
+	svn co https://svn.r-project.org/R/trunk/
+```
+   - Similary, get a released version, e.g., `4.0.0`, as  
+   `svn co https://svn.r-project.org/R/tags/R-4-0-0`
+
+   - Alternatively, get the R development sources from a github **read-only mirror**, e.g.,
+       - https://github.com/wch/r-source  (for many years)
+       - https://github.com/r-devel/r-svn (relatively recent)
+
+_Or_  
+1. Get the R *sources* from CRAN, i.e. as "tarball", e.g `R-4.1.0.tar.gz`;
+   in a terminal:  
+   `wget https://cloud.r-project.org/src/base/R-latest.tar.gz`  
+   (takes 2.0 sec for MM)
+
+## "Browse" / navigate *inside* the folder of the latest (released) R version;
+
+2. Unpack the tarball (in 0.5 sec):  
+	`tar xf R-latest.tar.gz`
+
+3. Now, navigate *inside* the folder of the latest (released) R version,
+   `R-4.1.0/` currently.
+
+- Note `src/library/`
+- `src/main/`
+- `src/nmath/` (Martin's favorite)
+- `src/library/Recommended/`
+- `src/base/`
+
 ## Finding tests
+
+- `tests/` , e.g.,
+- `tests/reg-tests-1d.R`
+- `tests/d-p-q-r-tst-2.R`  and many more
 
 ## Finding R code/documentation/etc of base packages
 
-**R checkout and Build Practicum? Is that even in scope?**
- Uwe Ligges article about the tarball. R journal
+- `src/library/stats/R/`
+- `src/library/stats/man/`
+- `src/library/stats/tests/`
+- `src/library/stats/demo/` (demos: the precursors of runnable vignettes)
 
+# R checkout and Build Practicum -- (instead of the following practicals)?
 
 # Possible Patch Practicals
 
