@@ -83,7 +83,7 @@ __Note__ you can *also* use `podman` instead of `docker`, notably on
 Fedora/Redhat/... Linux systems where it is well supported.  
 In the terminal, simply replace the word `docker` by `podman`.
 
-If using the rstudio image, please read and understand the insturctions for using the container ( [https://hub.docker.com/r/rocker/rstudio](https://hub.docker.com/r/rocker/rstudio)) and come ready and able to use the container.
+If using the rstudio image, please read and understand the instructions for using the container ( [https://hub.docker.com/r/rocker/rstudio](https://hub.docker.com/r/rocker/rstudio)) and come ready and able to use the container.
 
 If for some reason you choose not to use the rstudio based images, ensure your container has some other progam usable as an IDE (e.g., emacs with ess) installed.
 
@@ -158,5 +158,110 @@ When invoking the Rstudio container as described at  [https://hub.docker.com/r/r
 
 
 
+# Practicum 2 - Bugs to Choose From
+## Present in 3.3.2
+
+### `as.person` not handling multiple emails
+
+```
+joe <- person("Joe", "Schmo", email = c("first@site.com", "second@uni.edu"))
+str(joe$email)
+##  chr [1:2] "first@site.com" "second@uni.edu"
+
+joe_text <- format(joe)
+print(joe_text)
+## [1] "Joe Schmo <first@site.com, second@uni.edu>"
+
+joe_new <- as.person(joe_text)
+str(joe_new$email)
+##  chr "first@site.com, second@uni.edu"
+```
 
 
+### `is.ratetablle` inconsistent between `verbose=TRUE` and `verbose=FALSE`
+
+```
+library(survival)
+library(relsurv)
+data("slopop")
+is.ratetable(slopop)
+# [1] TRUE
+is.ratetable(slopop, verbose = TRUE)
+# [1] "wrong length for cutpoints 3"
+```
+
+### `diff` on `difftime` objects losing units
+
+```
+d <- as.POSIXct("2016-06-08 14:21", tz="US/Pacific") + as.difftime(2^(-2:8), units="mins")
+str(d)
+# POSIXct[1:11], format: "2016-06-08 14:21:15" "2016-06-08 14:21:30" ...
+str(diff(d))
+#Class 'difftime'  atomic [1:10] 15 30 60 120 240 480 960 1920 3840 7680
+#  ..- attr(*, "units")= chr "secs"
+str(diff(diff(d)))
+#Class 'difftime'  num [1:9] 15 30 60 120 240 480 960 1920 3840
+```
+
+### `addmargins()` fails if supplied functions are not defined in the `stats` namespace or parent environment thereof
+
+```
+local({
+    
+    mB <- structure(c(16, 26, 27, 20, 24, 20, 19, 25, 40, 46, 46, 45), 
+    .Dim = c(4L,  3L), 
+    .Dimnames = list(Sea = c("Black", "Dead", "Red",  "White"), 
+                     Bee = c("Buzz", "Hum", "Total")), 
+    class = c("table", "matrix"))
+    
+    sqsm <- function(x) sum(x)^2/100
+
+    addmargins(mB, 1, list(list(All = sum, N = sqsm)))
+
+})
+```
+
+### Subsetting data.frame with factor column does not strip additional column class
+
+```
+data(iris)
+
+lapply(iris, class)
+Species2 <- iris$Species
+Sepal.Length2 <- iris$Sepal.Length
+
+class(Species2) <- c("some_class", class(Species2))
+class(Sepal.Length2) <- c("some_class", class(Sepal.Length2))
+
+attr(Species2, "some_attr") <- "some_attr_val"
+attr(Sepal.Length2, "some_attr") <- "some_attr_val"
+
+iris$Species2 <- Species2
+iris$Sepal.Length2 <- Sepal.Length2
+
+lapply(iris, class)
+lapply(iris, attributes)
+
+iris2 <- iris[c(2:5), ] # row-wise subsetting
+lapply(iris2, class)    # Species2: class c("some_class", "factor"), Sepal.Length2 class stripped to numeric
+lapply(iris2, attributes) # all (incl. Species2): "some_attr" is stripped
+```
+
+
+## In Latest Release/Unresolved
+
+### data.frame subsetting issue listed above
+
+### `debugcall` fails after loading `mgcv` or `survival`
+
+```
+library("mgcv")  # or "survival", or just loadNamespace("Matrix")
+f <- factor(1:10)
+debugcall(summary(f))
+```
+
+### What `substring(., last=*)` should default to
+
+- Search for "Should last default to" / "for substring()" in the 
+  [R-devel list archives](https://stat.ethz.ch/pipermail/r-devel/2021-June/)
+- Look at the first 2--3 mails; what do you think? how would you solve it?

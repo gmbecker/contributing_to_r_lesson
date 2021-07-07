@@ -3,9 +3,10 @@ title: Contributing to R
 author: Gabriel Becker and Martin Maechler
 output: 
   beamer_presentation:
-    latex_engine: xelatex
-    slide_level: 2
+     slide_level: 2
+classoption: "aspectratio=1610"
 ---
+
 # Who We Are
 
 ## Martin Maechler - R-core (and R-Foundation)
@@ -41,7 +42,38 @@ output:
   - and how to perform them
 - What kinds of well-meaning efforts do not help
   - And how to avoid or improve them
-  
+
+# The Shoulders of Giants - Previous/Ongoing Outreach and Engagement
+
+## R-core Developer Blog
+
+![](rblog1.png)
+
+![](rblog2.png)
+
+![](rblog3.png)
+
+## R-Foundation FORWARDS - R Contribution Working Group
+
+- Organized by Heather Turner
+- R Core Members
+  - Luke Tierney, Michael Lawrence, Martyn Plummer
+- R Foundation members
+  - Jenny Bryan, Di Cook
+- R community  members you may have heard of
+  - Kara Woo, Amelia McNamera, Toby Hocking, Michael Chirico, Brodie Gasalm, Sebastian Meyer
+  - And many you likely will soon 
+
+
+## R Contribution Working Group
+
+- R-devel Slack
+  - ~110 members
+  - not super active - **yet***
+- (early ongoing development) R Developer's Guide
+  - Saranjeet Kaur under Heather Turner and Michael Lawrence
+  - https://github.com/forwards/rdevguide
+
 
 # Gabe As A Case Study - Illustrative Examples From a Patchy Past
 # Circa 2013 - The CV Padder (AKA Graduate Student)
@@ -89,7 +121,7 @@ I called checkArity with the signature of Rf_checkArity (including the call) in 
 
 Arity check needs to happen before the special casing for unary ops (assumed to be `!` ) on simple logical scalars.
 
-## 😬😬😬 (3 grimace face emojis)
+## :-|
 **Martin**
 
 <snip>
@@ -459,42 +491,88 @@ Run it
  Uwe Ligges article about the tarball. R journal
 
 
-## Possible Patch Practicals
+# Possible Patch Practicals
 
-### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17150
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17
 
 - as.person not handling multiple emails in the string
 - requires
   - locating source code
   - regular expressions
 
-### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17167
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17167
 
 - `is.ratetable()` inconsistent between `verbose=TRUE` and `verbose=FALSE`
 - Not an R bug
   - Good practice for recognizing that
   
-### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16940
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16940
 
 - `diff()` on `"difftime"` object losing unit
 - involves S3 dispatch/methods
 - fix is small
 
 
-### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17124  by Alex Bertram 
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17124
 
+by Alex Bertram 
+
+
+- Present 3.3.2
 - about `eval(substitute(...))`, environments; patch proposal in 2016,
   analysis by Sebastian Meyer in 2020.
 
-#### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18041
+
+
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18140
+
+ *`[.data.frame`: subsetting data frame with factor column: additional class not stripped*
+
+- new, from  1 Jul 2021
+- can you reproduce?
+- is this a bug?   If yes, _where_, if not, _why_ ?
+- what do the docs say?
+
+
+# Currently Unfixed
+
+
+
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18140
+
+ *`[.data.frame`: subsetting data frame with factor column: additional class not stripped*
+
+- new, from  1 Jul 2021
+- can you reproduce?
+- is this a bug?   If yes, _where_, if not, _why_ ?
+- what do the docs say?
+
+
+
+
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18143 by Sebastian Meyer
+ *debugcall() example fails after loading mgcv (or survival)*
+
+- *very* new bug report from Tue, July 6, 2021 (yesterday!)
+- Have seen `debugcall()` above (!).
+
+
+
+
+# Other
+
+
+
+
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18041
 
 - `checkRdaFiles()$version` bug, short and simple
 - Needs anything between R 3.5.0 and 4.0.3 to reproduce the problem.
 
 
-### Recent issues, still visible in *current* R (4.0.x, 4.1.0)
+# Recent issues, still visible in *current* R (4.0.x, 4.1.0)
 
-### `substring(.., last=*)` discussion / report on the R-devel mailing list
+## `substring(.., last=*)` discussion / report on the R-devel mailing list
 - Search for "Should last default to" / "for substring()" in the 
   [R-devel list archives](https://stat.ethz.ch/pipermail/r-devel/2021-June/)
 - Look at the first 2--3 mails; what do you think? how would you solve it?
@@ -507,7 +585,7 @@ Run it
 ```
 
 
-### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18123  by Michael Chirico
+## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18123  by Michael Chirico
 
 Fixed by MM, in `svn rev 80537`
 
@@ -516,7 +594,7 @@ Fixed by MM, in `svn rev 80537`
     doc/NEWS.Rd src/library/tools/R/translations.R
 ```
 
-### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18129  by Michael Chirico
+## C code: https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18129  by Michael Chirico
 
 - Code/Bug analysis -- what can you say?
 - between C code and documentation
@@ -528,19 +606,3 @@ svn ci -m'Fix PR#18129 (M.Chirico) to use _G() macro consistently in RGui'
      src/extra/graphapp/metafile.c src/extra/graphapp/printer.c
 ```
 
-
-### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18140
- *`[.data.frame`: subsetting data frame with factor column: additional class not stripped*
-
-- new, from  1 Jul 2021
-- can you reproduce?
-- is this a bug?   If yes, _where_, if not, _why_ ?
-- what do the docs say?
-
-
-
-### https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18143 by Sebastian Meyer
- *debugcall() example fails after loading mgcv (or survival)*
-
-- *very* new bug report from Tue, July 6, 2021 (yesterday!)
-- Have seen `debugcall()` above (!).
