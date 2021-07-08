@@ -294,7 +294,11 @@ Take away points:
   - `debug(_<fn>_)`
   - `debugonce(_<fn>_)`
   - `trace(_<fn>_, ..)`   and
-  - `options(error=recover)`   are your friends
+
+  - `options(error=recover)`   and
+  - `options(warn = 2)`  turning warnings into errors (-> easily get into debug)
+
+function calls are your friends
 
 - *Hint*: during debugging,  Martin's favorite  `ls.str()`  is often useful.
 
@@ -575,7 +579,7 @@ R's Bugzilla: https://bugs.r-project.org/bugzilla/
 - Patches which bundle enhancements with bug fixes
   - Even when they're related
 - Patches which bundle multiple separable bug fixes
-- Breaking backwards compatibility in anyway way
+- Breaking backwards compatibility in any way
   - Unless you've heard from R-core member that it is desired
 
 
